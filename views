@@ -1,0 +1,15 @@
+<script>
+ $(document).ready(function() {
+        $('#classTable').DataTable({
+              "responsive": true,
+              "lengthChange": false,
+              "autoWidth": false,
+             "processing": true,
+             "serverSide": true,
+             "ajax": {
+               "url": "<?=site_url('Admin/get_kategori')?>",
+               "type": "POST"
+             }
+        })
+ }) 
+</script>
