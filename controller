@@ -1,0 +1,27 @@
+ public function get_kategori()
+  {
+    $list = $this->Master_kategori_model->get_datatables();
+		$data = array();
+		$no = @$_POST['start'];
+		foreach ($list as $subclass) {
+				$no++;
+				$row = array();
+				$row[] = $no.".";
+				$row[] = $subclass->kode_kategori;
+				$row[] = $subclass->nama_kategori;
+				$row[] = ($subclass->status == 1 ? '<span class="badge badge-pill badge-danger">Aktif</span>' : '<span class="badge badge-pill badge-secondary">NonAktif</span>');
+				// add html for action
+				$row[] = '
+				          <a href="" class="btn btn-warning btn-xs"><i class="fa fa-edit"></i> </a> 
+								  <a href="" id="btn-hapus"  class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> </a>';
+				$data[] = $row;
+		}
+		$output = array(
+								"draw" => @$_POST['draw'],
+								"recordsTotal" => $this->Master_kategori_model->count_all(),
+								"recordsFiltered" => $this->Master_kategori_model->count_filtered(),
+								"data" => $data,
+						);
+		// output to json format
+		echo json_encode($output);
+  }
