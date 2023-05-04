@@ -1,0 +1,47 @@
+
+<div class="container-xxl flex-grow-1 container-p-y">
+              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span> <?= $title?></h4>
+              <div id="flash" data-flash="<?= $this->session->flashdata('pesan') ?>">
+              <div id="flasherr" data-flasherr="<?= $this->session->flashdata('error') ?>">
+                            <a href="<?= site_url('Admin/Roletambah')?>" class="btn btn-outline-primary mb-1">
+                              <span class="tf-icons bx bx-plus-circle"></span>&nbsp; Tambah Role
+                            </a>
+               <!-- Bordered Table -->
+               <div class="card">
+               <h5 class="card-header"><?= $title?></h5>
+                <div class="card-body">
+                  <div class="table-responsive text-nowrap">
+                    <table class="table table-bordered" id="myTable2">
+                      <thead>
+                        <tr>
+                      <th style="width:5%">#No</th>
+                      <th>Nama Role</th>
+                      <th style="width:5%">Action</th>
+                    </tr>
+                      </thead>
+                      <tbody>
+                      <?php 
+                    $no=1;
+                     foreach ($menus as $m) { ?>
+                       <tr>
+                        <td><?=$no++?></td>
+                        <td><?= $m->menu?></td>
+                        <td>
+                        <div class="custom-control custom-switch">
+                       <input class="form-check-inputs" type="checkbox" 
+                        <?= cek_akses($role[0]->id, $m->id)?>  
+                        data-role="<?=$role[0]->id?>"
+                        data-menu="<?=$m->id?>"/>
+                       <label class="form-check-label" for="defaultCheck3">Aktif Or NonAktif </label>
+                      </div> 
+                        </td>
+                       </tr>
+                    <?php } ?>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <hr>
+
